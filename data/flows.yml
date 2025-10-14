@@ -1,0 +1,12 @@
+flows:
+  ahead_general:
+    description: Fragebogen zum allgemeinen Befinden
+    steps:
+      - collect: patient_is_sober_flag
+      - collect: patient_pain_intensity_scale
+      #- action: action_check_pain_in_range
+      - collect: patient_return_home_transportation_mode
+        description: how the patient gets home
+      - action: utter_affirmation
+      - action: utter_thank_you
+      - action: utter_end_of_story

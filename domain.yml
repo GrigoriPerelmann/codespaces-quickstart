@@ -1,0 +1,59 @@
+version: "3.1"
+
+slots:
+  patient_is_sober_flag:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+  patient_pain_intensity_scale:
+    type: float
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+    validation:
+      rejections:
+        - if: not (slots.patient_pain_intensity_scale >= 0)
+          utter: utter_invalid_pain_intensity
+  patient_return_home_transportation_mode:
+    type: categorical
+    values:
+      - Auto
+      - ÖPNV
+      - Taxi
+      - Zu Fuß
+      - Begleitperson
+      - anders
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+
+
+responses:
+  utter_ask_patient_is_sober_flag:
+    - text: <question id="2025-1-1" type="polar" slot="patient_is_sober_flag" options="['Ja', 'Nein']">Sind Sie nüchtern?</question>
+  utter_ask_patient_pain_intensity_scale:
+    - text: <question id="2025-1-6" type="singlechoice" slot="patient_pain_intensity_scale" options="['0', '1', '2', '3', '4', '5', '6', '7', '8','9','10']" unit="options_slider">Haben Sie Schmerzen? Bitte geben Sie die Schmerzintensität auf einer Skala von 0 = gar keine Schmerzen bis 10 = stärkste Schmerzen an.</question>
+  utter_ask_patient_return_home_transportation_mode:
+    - text: <question id="2025-1-7" type="singlechoice" slot="patient_return_home_transportation_mode" options="['Auto', 'ÖPNV', 'Taxi', 'Zu Fuß', 'Begleitperson', 'anders']">Wie kommen Sie nach Hause?</question>
+  
+  utter_invalid_pain_intensity:
+    - text: Nicht in Range
+
+  utter_affirmation:
+    - text: <statement id="99.31">Alles klar!</statement>
+    - text: <statement id="99.32">In Ordnung!</statement>
+    - text: <statement id="99.33">Das habe ich notiert!</statement>
+    - text: <statement id="99.34">Verstanden!</statement>
+
+  utter_thank_you:
+    - text: <statement id="99.41">Herzlichen Dank!</statement>
+    - text: <statement id="99.42">Vielen Dank!</statement>
+    - text: <statement id="99.43">Dankesehr!</statement>
+    - text: <statement id="99.44">Ich bedanke mich!</statement>
+
+  utter_end_of_story:
+    - text: <end_of_story/>  
+
+actions:
+  - action_check_pain_in_range
