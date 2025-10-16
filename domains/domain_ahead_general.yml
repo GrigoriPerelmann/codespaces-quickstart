@@ -1,0 +1,90 @@
+version: "3.1"
+
+slots:
+  patient_is_sober_flag:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+  patient_paused_medication_flag:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+  patient_wears_hearing_aid_flag:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+  patient_wears_glasses_flag:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+  patient_wears_teeth_prosthesis_flag:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+  patient_pain_intensity_scale:
+    type: float
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+    validation:
+      rejections:
+        - if: not (slots.patient_pain_intensity_scale >= 0)
+          utter: utter_invalid_pain_intensity
+  patient_return_home_transportation_mode:
+    type: categorical
+    values:
+      - Auto
+      - ÖPNV
+      - Taxi
+      - Zu Fuß
+      - Begleitperson
+      - anders
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+  patient_chaperone_phone_number_correctness_flag:
+      type: bool
+      influence_conversation: true
+      mappings:
+      - type: from_llm
+  patient_chaperone_phone_number:
+      type: text
+      influence_conversation: true
+      mappings:
+      - type: from_llm
+  patient_chaperone_phone_number_check_flag:
+      type: bool
+      influence_conversation: true
+
+
+responses:
+  utter_ask_patient_is_sober_flag:
+   - text: <question id="2025-1-1" type="polar" slot="patient_is_sober_flag" options="['Ja', 'Nein']">Sind Sie nüchtern?</question>
+  utter_ask_patient_paused_medication_flag:
+   - text: <question id="2025-1-2" type="polar" slot="patient_paused_medication_flag" options="['Ja', 'Nein']">Falls sie ein Medikament pausieren mussten, haben Sie die Pausierung eingehalten?</question>
+  utter_ask_patient_wears_hearing_aid_flag:
+   - text: <question id="2025-1-3" type="polar" slot="patient_wears_hearing_aid_flag" options="['Ja', 'Nein']">Tragen Sie Hörgeräte?</question>
+  utter_ask_patient_wears_glasses_flag:
+   - text: <question id="2025-1-4" type="polar" slot="patient_wears_glasses_flag" options="['Ja', 'Nein']">Tragen Sie eine Brille?</question>
+  utter_ask_patient_wears_teeth_prosthesis_flag:
+    - text: <question id="2025-1-5" type="polar" slot="patient_patient_wears_teeth_prosthesis_flag" options="['Ja', 'Nein']">Tragen Sie eine Zahnprothese?</question>
+  utter_ask_patient_pain_intensity_scale:
+   - text: <question id="2025-1-6" type="singlechoice" slot="patient_pain_intensity_scale" options="['0', '1', '2', '3', '4', '5', '6', '7', '8','9','10']" unit="options_slider">Haben Sie Schmerzen? Bitte geben Sie die Schmerzintensität auf einer Skala von 0 = gar keine Schmerzen bis 10 = stärkste Schmerzen an.</question>
+  utter_ask_patient_return_home_transportation_mode:
+    - text: <question id="2025-1-7" type="singlechoice" slot="patient_return_home_transportation_mode" options="['Auto', 'ÖPNV', 'Taxi', 'Zu Fuß', 'Begleitperson', 'anders']">Wie kommen Sie nach Hause?</question>
+  utter_ask_patient_chaperone_phone_number_correctness_flag:
+    - text: <question id="2025-1-8" type="polar" slot="patient_chaperone_phone_number_correctness_flag" options="['Ja', 'Nein']">Ist die angegebene Telefonnummer der Abholperson korrekt`:` {patient_chaperone_phone_number}?</question>
+  utter_ask_patient_chaperone_phone_number:
+    - text: <question id="2025-1-9" type="phonenumber" slot="patient_chaperone_phone_number">Bitte geben Sie die korrekte Telefonnummer ein.</question>
+
+  utter_invalid_pain_intensity:
+    - text: Nicht in Range
+
+
+actions:
+  - action_check_pain_in_range

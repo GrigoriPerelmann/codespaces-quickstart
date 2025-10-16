@@ -1,0 +1,35 @@
+version: '3.1'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: false
+
+responses:
+  utter_greet:
+  - text: <statement id="99.11">Guten Tag!</statement>
+  - text: <statement id="99.12">Hallo!</statement>
+  - text: <statement id="99.13">Ich grüße Sie!</statement>
+  utter_goodbye:
+  - text: <statement id="99.21">Auf Wiedersehen!</statement>
+  - text: <statement id="99.22">Tschüss!</statement>
+  - text: <statement id="99.23">Bis zum nächsten Mal!</statement>
+  - text: <statement id="99.24">Machen Sie es gut!</statement>
+  utter_affirmation:
+  - text: <statement id="99.31">Alles klar!</statement>
+  - text: <statement id="99.32">In Ordnung!</statement>
+  - text: <statement id="99.33">Das habe ich notiert!</statement>
+  - text: <statement id="99.34">Verstanden!</statement>
+  utter_thank_you:
+  - text: <statement id="99.41">Herzlichen Dank!</statement>
+  - text: <statement id="99.42">Vielen Dank!</statement>
+  - text: <statement id="99.43">Dankesehr!</statement>
+  - text: <statement id="99.44">Ich bedanke mich!</statement>
+  utter_start:
+  - text: <statement id="99.51">Lassen Sie uns loslegen!</statement>
+  - text: <statement id="99.52">Lassen Sie uns beginnen!</statement>
+  - text: <statement id="99.53">Los geht's!</statement>
+  - text: <statement id="99.54">Dann kann es nun losgehen!</statement>
+  - text: <statement id="99.55">Dann starte ich jetzt den Fragebogen!</statement>
+  utter_end_of_story:
+  - text: <end_of_story/>
+  utter_ask_repetition:
+  - text: <statement>Hallo, sind Sie noch da? Bitte versuchen Sie die Frage zu beantworten.</statement> 

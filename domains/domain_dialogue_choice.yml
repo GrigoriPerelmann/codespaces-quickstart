@@ -1,0 +1,20 @@
+version: '3.1'
+
+slots:
+  dialogue_choice:
+    type: categorical
+    values:
+    - ahead_general
+    - ahead_personal_data
+    mappings:
+    - type: from_llm
+
+responses:
+  utter_ask_dialogue_choice:
+  - text: <question id="1.1" type="option" options="['patient_main_data', 'patient_personal_data', 'patient_history_general', 'patient_assessment_adult', 'patient_history_chronic_and_acute_pains', 'eortc_og', 'eortc_qlq', 'barthel_index', 'sensory_organs', 'lungs_and_airways', 'blood_and_immune_system', 'upper_abdominal_organs', 'ahead_general', 'ahead_personal_data']" slot="dialogue_choice">Welchen Dialog möchten Sie gerne starten?</question>
+  utter_welcome_to_ahead_general:
+  - text: <statement id="2025-1-0">Herzlich Willkommen zum Fragebogen AHEAD Allgemeines.</statement>
+  utter_welcome_to_ahead_personal_data:
+  - text: <statement id="2025-2-0">Herzlich Willkommen zum Fragebogen AHEAD Persönliche Lebensumstände.</statement>
+
+

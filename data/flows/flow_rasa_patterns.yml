@@ -1,0 +1,13 @@
+flows:
+  pattern_completed:
+    description: Completion of a questionnaire flow
+    steps:
+      - action: utter_affirmation
+      - action: utter_thank_you
+      - action: utter_end_of_story
+
+  pattern_session_start:
+    description: start of session with dialogue choice
+    name: pattern session start
+    steps:
+      - link: dialogue_choice
