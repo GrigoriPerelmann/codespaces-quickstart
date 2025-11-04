@@ -1,0 +1,35 @@
+flows:
+  pattern_completed:
+    description: Completion of a questionnaire flow
+    steps:
+      - action: utter_affirmation
+      - action: utter_thank_you
+      - action: utter_end_of_story
+
+  pattern_session_start:
+    description: start of session with dialogue choice
+    name: pattern session start
+    steps:
+      - link: dialogue_choice
+
+  pattern_correction:
+    description: user wants to correct what they said previously
+    steps:
+      - noop: true
+        next:
+          - if: context.is_reset_only
+            then:
+              - action: action_correct_flow_slot
+                next: END
+          - else: confirm_first
+      - id: confirm_first
+        collect: confirm_slot_correction
+        next:
+          - if: not slots.confirm_slot_correction
+            then:
+              - action: utter_not_corrected_previous_input
+                next: END
+          - else:
+              - action: action_correct_flow_slot
+              - action: utter_corrected_previous_input
+                next: END
