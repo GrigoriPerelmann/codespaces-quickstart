@@ -1,0 +1,16 @@
+flows:
+  ahead_personal_data:
+    description: Questionnaire for personal data
+    persisted_slots:
+      - patient_urin
+      - patient_stool
+      - patient_transpiration_flag
+      - patient_fever_flag
+    steps:
+      - action: utter_welcome_to_ahead_personal_data
+      - collect: patient_urin
+        description: if there are any abnormalities in regards to patients urin
+      - collect: patient_stool
+        description: if there are any abnormalities in regards to patients stool
+      - collect: patient_transpiration_flag
+      - collect: patient_fever_flag

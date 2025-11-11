@@ -1,0 +1,47 @@
+version: "3.1"
+
+slots:
+  patient_urin:
+    type: categorical
+    values:
+     - Brennen beim Wasserlassen
+     - gehäuftes Wasserlassen
+     - Schäumender urin
+     - Dunkelfärbung des Urins
+     - Inkontinenz
+     - Nein
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+  patient_stool:
+    type: categorical
+    values:
+     - Schmerzen beim Stuhlgang
+     - gehäufte Stuhlfrequenz > 3/Tag
+     - Blutbeimengungen beim Stuhlgang
+     - Dunkelfärbung des Stuhlgangs
+     - Inkontinenz
+     - Nein
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+  patient_transpiration_flag:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+  patient_fever_flag:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_llm
+
+responses:
+  utter_ask_patient_urin:
+  - text: <question id="2025-2-1" type="singlechoice" slot="patient_urin" options="['Brennen beim Wasserlassen', 'gehäuftes Wasserlassen', 'Schäumender Urin', 'Dunkelfärbung des Urins', 'Inkontinenz', 'Nein']">Bestehen aktuell Auffälligkeiten beim Wasserlassen?</question> 
+  utter_ask_patient_stool:
+  - text: <question id="2025-2-2" type="singlechoice" slot="patient_stool" options="['Schmerzen beim Stuhlgang', 'gehäufte Stuhlfrequenz > 3/Tag', 'Blutbeimengungen beim Stuhlgang', 'Dunkelfärbung des Stuhlgangs', 'Inkontinenz', 'Nein']">Bestehen aktuell Auffälligkeiten beim Stuhlgang?</question> 
+  utter_ask_patient_transpiration_flag:
+  - text: <question id="2025-2-3" type="polar" slot="patient_transpiration_flag" options="['Ja','Nein']">Schwitzen Sie nachts vermehrt?</question> 
+  utter_ask_patient_fever_flag:
+  - text: <question id="2025-2-4" type="polar" slot="patient_fever_flag" options="['Ja','Nein']">Leiden Sie in den letzten Wochen vermehrt unter Fieber?</question> 
