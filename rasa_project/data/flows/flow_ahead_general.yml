@@ -1,6 +1,6 @@
 flows:
   ahead_general:
-    description: Fragebogen zum allgemeinen Befinden
+    description: Questionnaire for General Wellbeing
     persisted_slots:
       - patient_is_sober_flag
       - patient_is_sober_flag
