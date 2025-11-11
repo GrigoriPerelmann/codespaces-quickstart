@@ -23,7 +23,13 @@
 			"settings": {
 				"python.terminal.activateEnvInCurrentTerminal": true,
 				"python.defaultInterpreterPath": ".venv/bin/python",
-			}
+			},
+			"extensions": [
+				"ms-python.vscode-pylance",
+				"ms-python.python",
+				"esbenp.prettier-vscode",
+				"eamodio.gitlens"
+			]
 		}
 	},
 
