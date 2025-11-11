@@ -15,6 +15,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": ". /workspaces/codespaces-quickstart/.env; uv sync;",
 
 	// Configure tool-specific properties.
 	"customizations": {
