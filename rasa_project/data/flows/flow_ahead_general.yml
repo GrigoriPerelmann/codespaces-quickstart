@@ -3,7 +3,6 @@ flows:
     description: Questionnaire for General Wellbeing
     persisted_slots:
       - patient_is_sober_flag
-      - patient_is_sober_flag
       - patient_wears_hearing_aid_flag
       - patient_wears_glasses_flag
       - patient_wears_teeth_prosthesis_flag
@@ -12,8 +11,6 @@ flows:
       - patient_chaperone_phone_number_correctness_flag
       - patient_chaperone_phone_number
     steps:
-      - set_slots:
-        - patient_chaperone_phone_number_check_flag: true
       - action: utter_welcome_to_ahead_general
       - collect: patient_is_sober_flag
       - collect: patient_paused_medication_flag

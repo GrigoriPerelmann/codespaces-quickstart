@@ -59,6 +59,7 @@ slots:
       - type: from_llm
   patient_chaperone_phone_number_check_flag:
       type: bool
+      initial_value: true
       influence_conversation: true
   confirm_slot_correction:
     type: bool

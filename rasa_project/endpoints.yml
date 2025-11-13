@@ -44,6 +44,7 @@ action_endpoint:
 # Allow rephrasing of responses using a Rasa-hosted model
 nlg:
   type: rephrase
+  rephrase_all: false
   llm:
     model_group: rasa_command_generation_model
 
@@ -53,3 +54,8 @@ model_groups:
       - provider: rasa
         model: rasa/command-generator-llama-3.1-8b-instruct
         api_base: "https://tutorial-llm.rasa.ai"
+  - id: self_hosted_llm
+    models:
+      - provider: self-hosted
+        model: openai/gpt-oss-20b
+        api_base: "http://host.docker.internal:1234/v1"
